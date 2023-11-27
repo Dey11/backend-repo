@@ -1,7 +1,7 @@
 const DriverSchema = require("../models/driverModel");
 
 exports.bookUser = async (req, res) => {
-  const { pickup, drop, seats } = req.params;
+  const { pickup, drop, seats } = req.body;
   try {
     const driver = await DriverSchema.findOne({ driverIsBooked: "filling" });
     var freeSeats = 0;
@@ -82,7 +82,7 @@ exports.bookUser = async (req, res) => {
           );
         }
       }
-      res.status(200).json({ autono: autono });
+      res.status(200).json({ message: `${autono}` });
     } else {
       const driver = await DriverSchema.findOneAndUpdate(
         { driverIsBooked: "null" },
@@ -111,7 +111,7 @@ exports.bookUser = async (req, res) => {
           },
           { returnNewDocument: true }
         );
-        res.status(200).json({ autono: autono });
+        res.status(200).json({ message: `${autono}` });
       } else if (seats === 3) {
         const updatedDriver = await DriverSchema.findOneAndUpdate(
           { autono },
@@ -128,7 +128,7 @@ exports.bookUser = async (req, res) => {
           },
           { returnNewDocument: true }
         );
-        res.status(200).json({ autono: autono });
+        res.status(200).json({ message: `${autono}` });
       } else if (seats === 2) {
         const updatedDriver = await DriverSchema.findOneAndUpdate(
           { autono },
@@ -142,7 +142,7 @@ exports.bookUser = async (req, res) => {
           },
           { returnNewDocument: true }
         );
-        res.status(200).json({ autono: autono });
+        res.status(200).json({ message: `${autono}` });
       } else {
         const updatedDriver = await DriverSchema.findOneAndUpdate(
           { autono },
@@ -153,7 +153,7 @@ exports.bookUser = async (req, res) => {
           },
           { returnNewDocument: true }
         );
-        res.status(200).json({ autono: autono });
+        res.status(200).json({ message: `${autono}` });
       }
     }
   } catch (error) {
